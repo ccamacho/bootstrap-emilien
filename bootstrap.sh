@@ -10,7 +10,6 @@ set -e
 
 sudo apt-get -y install locales vim screen git-core zsh-beta
 sudo locale-gen en_US.UTF-8
-sudo dpkg-reconfigure locales
 
 sudo sed -i '/^%sudo/ { s/ALL$/NOPASSWD:ALL/ }' /etc/sudoers
 
