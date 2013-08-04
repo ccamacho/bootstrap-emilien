@@ -2,7 +2,7 @@
 #
 # Bootstrap script (Inspired by Chmouel)
 #
-# Use : sudo apt-get -y install curl  && curl -L https://github.com/EmilienM/emilien-config/raw/master/bootstrap.sh | sh
+# Use : sudo apt-get -y install curl  && curl -L http://goo.gl/JHWf1U | sh
 #
 
 export DEBIAN_FRONTEND=noninteractive
