@@ -112,6 +112,11 @@
     msg: "Run vi and :PlugInstall to deploy plugins."
   when: vimrc.stat.islnk is not defined
 
+- name: Deploy secret files
+  git:
+    repo: 'git.macchi.pro:/srv/git/backup.git'
+    dest: /home/{{ home_user }}/git/EmilienM/backup
+
 
 # TODO:
 # - zshrc_extra

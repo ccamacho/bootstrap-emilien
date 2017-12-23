@@ -25,6 +25,7 @@ directory_list:
   - .config/awesome
   - .vimsessions
   - .vim/autoload
+  - bin
 absent_directory_list:
   - Desktop
   - Documents
