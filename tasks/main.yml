@@ -66,13 +66,13 @@
 
 - name: Deploy .gertty.yaml
   copy:
-    src: /home/{{ home_user }}/git/EmilienM/backup/gertty/{{ item }}.yaml
-    dest: /home/{{ home_user }}
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
     mode: '0600'
   with_items:
-    - gertty
-    - gertty-rdo
-    - gertty-osp
+    - { src: '/home/{{ home_user }}/git/EmilienM/backup/gertty/gertty.yaml', dest: '/home/{{ home_user }}/.gertty.yaml' }
+    - { src: '/home/{{ home_user }}/git/EmilienM/backup/gertty/gertty-rdo.yaml', dest: '/home/{{ home_user }}/.gertty-rdo.yaml' }
+    - { src: '/home/{{ home_user }}/git/EmilienM/backup/gertty/gertty-osp.yaml', dest: '/home/{{ home_user }}/.gertty-osp.yaml' }
 
 - name: Configure Terminator
   template:
@@ -139,6 +139,11 @@
     src: zshrc
     dest: /etc/profile.d/zsh-{{ home_user }}.sh
   become: true
+
+- name: Configure OwnCloud
+  copy:
+    src: /home/{{ home_user }}/git/EmilienM/backup/owncloud/owncloud.cfg
+    dest: /home/{{ home_user }}/.local/share/data/ownCloud/owncloud.cfg
 
 # TODO:
 # - openvpn

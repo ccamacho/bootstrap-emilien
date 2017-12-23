@@ -16,6 +16,9 @@ package_list:
   - libselinux-python
   - tig
   - weechat
+  - owncloud-client
+  - openvpn
+  - socat
 home_user: emilien
 directory_list:
   - git/EmilienM
@@ -28,6 +31,8 @@ directory_list:
   - .vim/autoload
   - bin
   - .weechat
+  - .local/share/data/ownCloud
+  - owncloud
 absent_directory_list:
   - Desktop
   - Documents
