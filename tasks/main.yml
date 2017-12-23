@@ -120,6 +120,11 @@
 - name: Manage weechat configuration
   shell: cp -r /home/{{ home_user }}/git/EmilienM/backup/weechat/* /home/{{ home_user }}/.weechat/
 
+- name: Deploy custom zsh environment
+  template:
+    src: zshrc
+    dest: /etc/profile.d/zsh-{{ home_user }}.sh
+
 # TODO:
 # - zshrc_extra
 # - packages

@@ -1,0 +1,24 @@
+export REQUESTS_CA_BUNDLE=/etc/pki/tls/certs/ca-bundle.crt
+source ~/.rdocloud-rc
+export EDITOR=vim
+alias s="ssh"
+alias k="ssh kim.macchi.pro"
+alias r="ssh raspi@raspi"
+alias grep="grep --color=always"
+alias x="grep -r"
+alias gcb="git checkout -b"
+alias grd=" git review -d"
+alias pt="rake spec SPEC_OPTS='--format documentation'"
+alias screen_laptop_off="xrandr --output eDP-1 --off"
+alias screen_home_enable="xrandr --output eDP-1 --below DP-1 --mode 1920x1080"
+alias screen_office_enable="xrandr --output eDP-1 --below HDMI1 --mode 1920x1080"
+alias screen_office_disable="xrandr --output HDMI1 --off"
+alias screen_home_disable="xrandr --output DP-1 --off"
+alias cpu_save="sudo cpupower frequency-set --governor powersave"
+alias cpu_perf="sudo cpupower frequency-set --governor performance"
+alias filer-rh="ssh emacchi@file.rdu.redhat.com"
+alias light_max="echo 851 | sudo tee /sys/class/backlight/intel_backlight/brightness"
+alias light_min="echo 1 | sudo tee /sys/class/backlight/intel_backlight/brightness"
+alias light_avg="echo 100 | sudo tee /sys/class/backlight/intel_backlight/brightness"
+alias gci="gcm; git branch -D ci-test; gcb ci-test; echo test>test; git add test; git commit -a -m 'CI test - never merge'; git review"
+export VAGRANT_DEFAULT_PROVIDER=virtualbox
