@@ -15,6 +15,7 @@ package_list:
   - zsh
   - libselinux-python
   - tig
+  - weechat
 home_user: emilien
 directory_list:
   - git/EmilienM
@@ -26,6 +27,7 @@ directory_list:
   - .vimsessions
   - .vim/autoload
   - bin
+  - .weechat
 absent_directory_list:
   - Desktop
   - Documents
