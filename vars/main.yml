@@ -23,6 +23,8 @@ directory_list:
   - git/rdo
   - .config/terminator
   - .config/awesome
+  - .vimsessions
+  - .vim/autoload
 absent_directory_list:
   - Desktop
   - Documents

@@ -35,8 +35,13 @@
     dest: /home/{{ home_user }}/git/EmilienM/oh-my-zsh
     version: emilien
 
+- stat:
+    path: /home/{{ home_user }}/.zshrc
+  register: zshrc
+
 - name: Install oh-my-zsh
   shell: /home/{{ home_user }}/git/EmilienM/oh-my-zsh/tools/install.sh
+  when: zshrc.stat.islnk is not defined
 
 - name: Update oh-my-zsh git fork
   git:
@@ -65,7 +70,7 @@
     src: terminator
     dest: /home/{{ home_user }}/.config/terminator/config
 
-- name: Deploy awesome-copycats git fork
+- name: Deploy awesome-copycats fork
   git:
     repo: 'https://github.com/EmilienM/awesome-copycats.git'
     dest: /home/{{ home_user }}/.config/awesome
@@ -76,9 +81,40 @@
     src: /home/{{ home_user }}/.config/awesome/rc.lua.template
     dest: /home/{{ home_user }}/.config/awesome/rc.lua
 
+- name: Deploy vim configuration
+  git:
+    repo: 'https://github.com/EmilienM/grimvim.git'
+    dest: /home/{{ home_user }}/.vim
+    version: emilien
+
+- stat:
+    path: /home/{{ home_user }}/.vim/autoload/plug.vim
+  register: plugvim
+
+- name: Deploy vim-plug
+  get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: /home/{{ home_user }}/.vim/autoload/plug.vim
+  when: plugvim.stat.islnk is not defined
+
+- name: Manage .vimrc
+  file:
+    src: /home/{{ home_user }}/.vim/vimrc
+    dest: /home/{{ home_user }}/.vimrc
+    state: link
+
+- stat:
+    path: /home/{{ home_user }}/.vimrc
+  register: vimrc
+
+- name: Notify that vi needs manual command to deploy plugins
+  debug:
+    msg: "Run vi and :PlugInstall to deploy plugins."
+  when: vimrc.stat.islnk is not defined
+
+
 # TODO:
 # - zshrc_extra
-# - awesome
 # - weechat
 # - vim
 # - packages
