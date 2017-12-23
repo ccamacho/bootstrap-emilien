@@ -1,0 +1,12 @@
+[Unit]
+Description=Redhat Token Openvpn service
+Before=openvpn@redhat.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/socat UNIX-LISTEN:/etc/openvpn/redhat.sock,fork,unlink-early EXEC:/etc/openvpn/redhat-token.sh,nofork
+WorkingDirectory=/etc/openvpn
+#SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
