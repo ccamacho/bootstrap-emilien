@@ -28,6 +28,7 @@
     path: /home/{{ home_user }}/{{ item }}
     state: absent
   with_items: "{{ absent_directory_list }}"
+  become: true
 
 - name: Deploy secret files
   git:
@@ -40,7 +41,8 @@
     dest: /home/{{ home_user }}/git/EmilienM/oh-my-zsh
     version: emilien
 
-- stat:
+- name: Check if zshrc is configured
+  stat:
     path: /home/{{ home_user }}/.zshrc
   register: zshrc
 
@@ -96,7 +98,8 @@
     dest: /home/{{ home_user }}/.vim
     version: emilien
 
-- stat:
+- name: Check if vim-plug is deployed
+  stat:
     path: /home/{{ home_user }}/.vim/autoload/plug.vim
   register: plugvim
 
@@ -112,7 +115,8 @@
     dest: /home/{{ home_user }}/.vimrc
     state: link
 
-- stat:
+- name: Check if vimrc is configured
+  stat:
     path: /home/{{ home_user }}/.vimrc
   register: vimrc
 
@@ -121,7 +125,8 @@
     msg: "Run vi and :PlugInstall to deploy plugins."
   when: vimrc.stat.islnk is not defined
 
-- stat:
+- name: Check if weechat is configured
+  stat:
     path: /home/{{ home_user }}/.weechat/weechat.conf
   register: weechat
 
@@ -145,5 +150,23 @@
     src: /home/{{ home_user }}/git/EmilienM/backup/owncloud/owncloud.cfg
     dest: /home/{{ home_user }}/.local/share/data/ownCloud/owncloud.cfg
 
-# TODO:
-# - openvpn
+- name: Configure OpenVPN
+  copy:
+    src: "{{ item }}"
+    dest: /etc/openvpn/client
+    owner: "root"
+    mode: 0700
+  with_fileglob:
+    - '/home/{{ home_user }}/git/EmilienM/backup/openvpn/*'
+  become: true
+
+- name: Red Hat token service
+  copy:
+    src: /home/{{ home_user }}/git/EmilienM/backup/openvpn/redhat-token.service
+    dest: /etc/systemd/system/redhat-token.service
+    owner: "root"
+  become: true
+
+- name: Force systemd to reread configs
+  systemd: daemon_reload=yes
+  become: true

@@ -34,11 +34,12 @@ directory_list:
   - .local/share/data/ownCloud
   - owncloud
 absent_directory_list:
-  - Desktop
-  - Documents
-  - Music
-  - Pictures
-  - Public
-  - Templates
-  - Videos
+  - /home/{{ home_user }}/Desktop
+  - /home/{{ home_user }}/Documents
+  - /home/{{ home_user }}/Music
+  - /home/{{ home_user }}/Pictures
+  - /home/{{ home_user }}/Public
+  - /home/{{ home_user }}/Templates
+  - /home/{{ home_user }}/Videos
+  - /etc/openvpn/server
 fedora_version: 27
