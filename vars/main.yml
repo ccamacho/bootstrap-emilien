@@ -14,6 +14,8 @@ package_list:
   - vim
   - wget
   - zsh
+  - libselinux-python
+  - tig
 home_user: emilien
 directory_list:
   - git/EmilienM
