@@ -1,2 +1,23 @@
 ---
 # vars file for bootstrap-emilien
+
+package_list:
+  - autojump
+  - autojump-zsh
+  - awesome
+  - chromium
+  - curl
+  - git
+  - git-review
+  - python-gertty
+  - terminator
+  - vim
+  - wget
+  - zsh
+home_user: emilien
+directory_list:
+  - git/EmilienM
+  - git/misc
+  - git/openstack
+  - git/rdo
+fedora_version: 27

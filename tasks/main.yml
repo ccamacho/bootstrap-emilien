@@ -1,0 +1,51 @@
+- name: Install the rpmfusion repo packages
+  yum: name={{ item }}
+       state=present
+  with_items:
+    - http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version }}.noarch.rpm
+    - http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_version }}.noarch.rpm
+
+- name: Install packages with yum
+  yum:
+    name: {{ item }}
+    with_items: ""{{ package_list }}
+
+- name: Install git directory
+  file:
+    path: /home/{{ home_user }}/{{ item }}
+    state: directory
+    with_items: "{{ directory_list }}"
+
+- name: Deploy oh-my-zsh git fork
+  git:
+    repo: 'https://github.com/EmilienM/oh-my-zsh.git'
+    dest: /home/{{ home_user }}/git/oh-my-zsh
+    version: emilien
+
+- name: Verify if zsh is deployed
+  stat:
+    path: /home/{{ home_user }}/.zshrc
+  register: zsh_deployed
+
+- name: Install oh-my-zsh
+  shell: /home/{{ home_user }}/git/oh-my-zsh/tools/install.sh
+  when: zsh_deployed.stat.islnk is defined
+
+- name: Deploy .gitconfig
+  template:
+    src: gitconfig
+    dest: /home/{{ home_user }}/.gitconfig
+
+- name: Deploy .gertty.yaml
+  template:
+    src: gertty.yaml
+    dest: /home/{{ home_user }}/.gertty.yaml
+
+# TODO:
+# - gertty
+# - zshrc_extra
+# - awesome
+# - weechat
+# - vim
+# - packages
+# - terminator

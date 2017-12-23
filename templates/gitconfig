@@ -1,0 +1,45 @@
+[user]
+  email = emilien@redhat.com
+  username = EmilienM
+  signingkey = 5383B437
+  name = Emilien Macchi
+[credential]
+  helper = cache --timeout 3600000
+[core]
+  autocrlf = false
+  safecrlf = true
+  editor = /usr/bin/vim
+[alias]
+  co = checkout
+  cm = checkout master
+  cs = commit -s
+  p = pull
+  pb = pull --rebase
+  ci = commit
+  st = status
+  br = branch
+  type = cat-file -t
+  dump = cat-file -p
+  hist = log --decorate --stat --graph --pretty=format:\"%d %Cgreen%h%Creset (%ar - %Cred%an%Creset), %s%n\"
+[gitreview]
+  username = emilienm
+[push]
+  default = matching
+[color]
+  ui = true
+[color "branch"]
+  current = yellow bold
+  local = green bold
+  remote = cyan bold
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
+[color "status"]
+  added = green bold
+  changed = yellow bold
+  untracked = red bold
+[github]
+  user = emilienm
