@@ -9,7 +9,6 @@ package_list:
   - curl
   - git
   - git-review
-  - python-gertty
   - terminator
   - vim
   - wget
@@ -22,4 +21,14 @@ directory_list:
   - git/misc
   - git/openstack
   - git/rdo
+  - .config/terminator
+  - .config/awesome
+absent_directory_list:
+  - Desktop
+  - Documents
+  - Music
+  - Pictures
+  - Public
+  - Templates
+  - Videos
 fedora_version: 27

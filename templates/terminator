@@ -1,0 +1,28 @@
+[global_config]
+  borderless = True
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  focus = mouse
+  inactive_color_offset = 0.701923076923
+  scroll_tabbar = True
+  title_transmit_bg_color = "#7a97e8"
+[keybindings]
+  help = <Primary><Alt>dollar
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    copy_on_selection = True
+    cursor_color = "#aaaaaa"
+    font = DejaVu Sans Mono 10
+    scrollback_lines = 2000
+    scrollbar_position = hidden
+    show_titlebar = False
+    use_system_font = False

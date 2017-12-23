@@ -1,3 +1,8 @@
+- user:
+    name: emilien
+    shell: /bin/zsh
+  become: true
+
 - name: Install the rpmfusion repo packages
   dnf:
     name={{ item }}
@@ -12,11 +17,17 @@
   with_items: "{{ package_list }}"
   become: true
 
-- name: Install git directory
+- name: Deploy directories
   file:
     path: /home/{{ home_user }}/{{ item }}
     state: directory
   with_items: "{{ directory_list }}"
+
+- name: Cleanup directories
+  file:
+    path: /home/{{ home_user }}/{{ item }}
+    state: absent
+  with_items: "{{ absent_directory_list }}"
 
 - name: Deploy oh-my-zsh git fork
   git:
@@ -33,22 +44,41 @@
     dest: /home/{{ home_user }}/.oh-my-zsh
     version: emilien
 
-
 - name: Deploy .gitconfig
   template:
     src: gitconfig
     dest: /home/{{ home_user }}/.gitconfig
 
+- name: Install Gertty from source
+  pip:
+    name: git+https://github.com/openstack/gertty
+  become: true
+
 - name: Deploy .gertty.yaml
   template:
     src: gertty.yaml
     dest: /home/{{ home_user }}/.gertty.yaml
+    mode: '0600'
+
+- name: Configure Terminator
+  template:
+    src: terminator
+    dest: /home/{{ home_user }}/.config/terminator/config
+
+- name: Deploy awesome-copycats git fork
+  git:
+    repo: 'https://github.com/EmilienM/awesome-copycats.git'
+    dest: /home/{{ home_user }}/.config/awesome
+    version: emilien
+
+- name: Deploy awesome configuration
+  copy:
+    src: /home/{{ home_user }}/.config/awesome/rc.lua.template
+    dest: /home/{{ home_user }}/.config/awesome/rc.lua
 
 # TODO:
-# - gertty
 # - zshrc_extra
 # - awesome
 # - weechat
 # - vim
 # - packages
-# - terminator
