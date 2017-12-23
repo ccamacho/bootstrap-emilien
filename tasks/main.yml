@@ -29,6 +29,11 @@
     state: absent
   with_items: "{{ absent_directory_list }}"
 
+- name: Deploy secret files
+  git:
+    repo: 'git.macchi.pro:/srv/git/backup.git'
+    dest: /home/{{ home_user }}/git/EmilienM/backup
+
 - name: Deploy oh-my-zsh git fork
   git:
     repo: 'https://github.com/EmilienM/oh-my-zsh.git'
@@ -60,10 +65,14 @@
   become: true
 
 - name: Deploy .gertty.yaml
-  template:
-    src: gertty.yaml
-    dest: /home/{{ home_user }}/.gertty.yaml
+  copy:
+    src: /home/{{ home_user }}/git/EmilienM/backup/gertty/{{ item }}.yaml
+    dest: /home/{{ home_user }}
     mode: '0600'
+  with_items:
+    - gertty
+    - gertty-rdo
+    - gertty-osp
 
 - name: Configure Terminator
   template:
@@ -112,19 +121,24 @@
     msg: "Run vi and :PlugInstall to deploy plugins."
   when: vimrc.stat.islnk is not defined
 
-- name: Deploy secret files
-  git:
-    repo: 'git.macchi.pro:/srv/git/backup.git'
-    dest: /home/{{ home_user }}/git/EmilienM/backup
+- stat:
+    path: /home/{{ home_user }}/.weechat/weechat.conf
+  register: weechat
 
 - name: Manage weechat configuration
   shell: cp -r /home/{{ home_user }}/git/EmilienM/backup/weechat/* /home/{{ home_user }}/.weechat/
+  when: weechat.stat.islnk is not defined
+
+- name: Deploy OpenStack Cloud rc file
+  template:
+    src: /home/{{ home_user }}/git/EmilienM/backup/openstack/rdocloud-rc
+    dest: /home/{{ home_user }}/.rdocloud-rc
 
 - name: Deploy custom zsh environment
   template:
     src: zshrc
     dest: /etc/profile.d/zsh-{{ home_user }}.sh
+  become: true
 
 # TODO:
-# - zshrc_extra
-# - packages
+# - openvpn
