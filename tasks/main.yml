@@ -1,8 +1,3 @@
-- user:
-    name: emilien
-    shell: /bin/zsh
-  become: true
-
 - name: Install the rpmfusion repo packages
   dnf:
     name={{ item }}
@@ -55,6 +50,11 @@
     repo: 'https://github.com/EmilienM/oh-my-zsh.git'
     dest: /home/{{ home_user }}/.oh-my-zsh
     version: emilien
+
+- user:
+    name: emilien
+    shell: /bin/zsh
+  become: true
 
 - name: Deploy .gitconfig
   template:
