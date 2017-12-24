@@ -20,7 +20,7 @@
 
 - name: Cleanup directories
   file:
-    path: {{ item }}
+    path: "{{ item }}"
     state: absent
   with_items: "{{ absent_directory_list }}"
   become: true
