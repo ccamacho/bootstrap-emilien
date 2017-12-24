@@ -25,7 +25,6 @@ directory_list:
   - .config/awesome
   - .config/terminator
   - .local/share/data/ownCloud
-  - .vim/autoload
   - .vimsessions
   - .weechat
   - bin

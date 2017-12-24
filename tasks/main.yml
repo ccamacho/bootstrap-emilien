@@ -98,6 +98,11 @@
     dest: /home/{{ home_user }}/.vim
     version: emilien
 
+- name: Ensure .vim/autoload exists
+  file:
+    path: /home/{{ home_user }}/.vim/autoload
+    state: directory
+
 - name: Check if vim-plug is deployed
   stat:
     path: /home/{{ home_user }}/.vim/autoload/plug.vim
