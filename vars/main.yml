@@ -9,31 +9,33 @@ package_list:
   - curl
   - git
   - git-review
+  - libselinux-python
+  - openvpn
+  - owncloud-client
+  - parcellite
+  - socat
   - terminator
+  - tig
   - vim
+  - weechat
   - wget
   - zsh
-  - libselinux-python
-  - tig
-  - weechat
-  - owncloud-client
-  - openvpn
-  - socat
 home_user: emilien
 directory_list:
+  - .config/awesome
+  - .config/terminator
+  - .local/share/data/ownCloud
+  - .vim/autoload
+  - .vimsessions
+  - .weechat
+  - bin
   - git/EmilienM
   - git/misc
   - git/openstack
   - git/rdo
-  - .config/terminator
-  - .config/awesome
-  - .vimsessions
-  - .vim/autoload
-  - bin
-  - .weechat
-  - .local/share/data/ownCloud
   - owncloud
 absent_directory_list:
+  - /etc/openvpn/server
   - /home/{{ home_user }}/Desktop
   - /home/{{ home_user }}/Documents
   - /home/{{ home_user }}/Music
@@ -41,5 +43,4 @@ absent_directory_list:
   - /home/{{ home_user }}/Public
   - /home/{{ home_user }}/Templates
   - /home/{{ home_user }}/Videos
-  - /etc/openvpn/server
 fedora_version: 27
