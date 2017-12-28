@@ -13,6 +13,7 @@ package_list:
   - openvpn
   - owncloud-client
   - parcellite
+  - python3-flake8
   - socat
   - terminator
   - tig
