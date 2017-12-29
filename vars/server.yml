@@ -19,3 +19,5 @@ directory_list:
   - git/EmilienM
 absent_directory_list:
   - /etc/openvpn/client
+  - /root/anaconda-ks.cfg
+  - /root/original-ks.cfg
