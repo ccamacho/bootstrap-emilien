@@ -191,5 +191,11 @@
   systemd: daemon_reload=yes
   become: true
 
+- name: Configure sudoers
+  template:
+    src: custom-sudoers.conf.j2
+    dest: /etc/sudoers.d/{{ home_user }}.conf
+  become: true
+
 # TODO:
 # - vagrant
