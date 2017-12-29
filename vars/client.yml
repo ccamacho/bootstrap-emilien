@@ -21,6 +21,7 @@ package_list:
   - weechat
   - wget
   - zsh
+  - NetworkManager-tui
 directory_list:
   - .config/awesome
   - .config/terminator
