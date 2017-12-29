@@ -17,6 +17,7 @@ directory_list:
   - .weechat
   - bin
   - git/EmilienM
+  - /etc/openvpn/jail/tmp
 absent_directory_list:
   - /etc/openvpn/client
   - /root/anaconda-ks.cfg
