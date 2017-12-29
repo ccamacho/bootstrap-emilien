@@ -4,7 +4,7 @@
   include_vars: server.yml
 
 - name: Install packages
-  dnf: name={{ item }}
+  yum: name={{ item }}
   with_items: "{{ package_list }}"
   become: true
 
