@@ -23,17 +23,17 @@ package_list:
   - zsh
   - NetworkManager-tui
 directory_list:
-  - .config/awesome
-  - .config/terminator
-  - .local/share/data/ownCloud
-  - .vimsessions
-  - .weechat
-  - bin
-  - git/EmilienM
-  - git/misc
-  - git/openstack
-  - git/rdo
-  - owncloud
+  - /home/{{ home_user }}/.config/awesome
+  - /home/{{ home_user }}/.config/terminator
+  - /home/{{ home_user }}/.local/share/data/ownCloud
+  - /home/{{ home_user }}/.vimsessions
+  - /home/{{ home_user }}/.weechat
+  - /home/{{ home_user }}/bin
+  - /home/{{ home_user }}/git/EmilienM
+  - /home/{{ home_user }}/git/misc
+  - /home/{{ home_user }}/git/openstack
+  - /home/{{ home_user }}/git/rdo
+  - /home/{{ home_user }}/owncloud
 absent_directory_list:
   - /etc/openvpn/server
   - /home/{{ home_user }}/Desktop

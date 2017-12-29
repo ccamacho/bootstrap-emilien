@@ -19,7 +19,7 @@
 
 - name: Deploy directories
   file:
-    path: /home/{{ home_user }}/{{ item }}
+    path: {{ item }}
     state: directory
   with_items: "{{ directory_list }}"
 

@@ -13,10 +13,10 @@ package_list:
   - zsh
   - php-intl
 directory_list:
-  - .vimsessions
-  - .weechat
-  - bin
-  - git/EmilienM
+  - /home/{{ home_user }}/.vimsessions
+  - /home/{{ home_user }}/.weechat
+  - /home/{{ home_user }}/bin
+  - /home/{{ home_user }}/git/EmilienM
   - /etc/openvpn/jail/tmp
 absent_directory_list:
   - /etc/openvpn/client
