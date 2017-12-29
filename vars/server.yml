@@ -11,6 +11,7 @@ package_list:
   - weechat
   - wget
   - zsh
+  - php-intl
 directory_list:
   - .vimsessions
   - .weechat
