@@ -66,6 +66,12 @@
     src: gitconfig
     dest: /home/{{ home_user }}/.gitconfig
 
+- name: Deploy tripleo-release script
+  template:
+    src: tripleo-release.sh
+    dest: /home/{{ home_user }}/bin/tripleo-release.sh
+
+
 - name: Install Gertty from source
   pip:
     name: git+https://github.com/openstack/gertty
