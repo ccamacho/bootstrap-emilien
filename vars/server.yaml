@@ -1,0 +1,22 @@
+---
+# vars file for bootstrap-emilien / client
+
+package_list:
+  - autojump
+  - autojump-zsh
+  - curl
+  - git
+  - libselinux-python
+  - openvpn
+  - tig
+  - vim
+  - weechat
+  - wget
+  - zsh
+directory_list:
+  - .vimsessions
+  - .weechat
+  - bin
+  - git/EmilienM
+absent_directory_list:
+  - /etc/openvpn/client

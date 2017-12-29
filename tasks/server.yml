@@ -1,0 +1,121 @@
+---
+
+- name: Include server variables
+  include_vars: server.yml
+
+- name: Install packages
+  dnf: name={{ item }}
+  with_items: "{{ client_package_list }}"
+  become: true
+
+- name: Deploy directories
+  file:
+    path: /home/{{ home_user }}/{{ item }}
+    state: directory
+  with_items: "{{ client_directory_list }}"
+
+- name: Cleanup directories
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items: "{{ client_absent_directory_list }}"
+  become: true
+
+- name: Deploy secret files
+  git:
+    repo: 'git.macchi.pro:/srv/git/backup.git'
+    dest: /home/{{ home_user }}/git/EmilienM/backup
+
+- name: Deploy oh-my-zsh git fork
+  git:
+    repo: 'https://github.com/EmilienM/oh-my-zsh.git'
+    dest: /home/{{ home_user }}/git/EmilienM/oh-my-zsh
+    version: emilien
+
+- name: Check if zshrc is configured
+  stat:
+    path: /home/{{ home_user }}/.zshrc
+  register: zshrc
+
+- name: Install oh-my-zsh
+  shell: /home/{{ home_user }}/git/EmilienM/oh-my-zsh/tools/install.sh
+  when: zshrc.stat.islnk is not defined
+
+- name: Update oh-my-zsh git fork
+  git:
+    repo: 'https://github.com/EmilienM/oh-my-zsh.git'
+    dest: /home/{{ home_user }}/.oh-my-zsh
+    version: emilien
+
+- user:
+    name: emilien
+    shell: /bin/zsh
+  become: true
+
+- name: Deploy .gitconfig
+  template:
+    src: gitconfig
+    dest: /home/{{ home_user }}/.gitconfig
+
+- name: Deploy vim configuration
+  git:
+    repo: 'https://github.com/EmilienM/grimvim.git'
+    dest: /home/{{ home_user }}/.vim
+    version: emilien
+
+- name: Ensure .vim/autoload exists
+  file:
+    path: /home/{{ home_user }}/.vim/autoload
+    state: directory
+
+- name: Check if vim-plug is deployed
+  stat:
+    path: /home/{{ home_user }}/.vim/autoload/plug.vim
+  register: plugvim
+
+- name: Deploy vim-plug
+  get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: /home/{{ home_user }}/.vim/autoload/plug.vim
+  when: plugvim.stat.islnk is not defined
+
+- name: Manage .vimrc
+  file:
+    src: /home/{{ home_user }}/.vim/vimrc
+    dest: /home/{{ home_user }}/.vimrc
+    state: link
+
+- name: Check if vimrc is configured
+  stat:
+    path: /home/{{ home_user }}/.vimrc
+  register: vimrc
+
+- name: Notify that vi needs manual command to deploy plugins
+  debug:
+    msg: "Run vi and :PlugInstall to deploy plugins."
+  when: vimrc.stat.islnk is not defined
+
+- name: Check if weechat is configured
+  stat:
+    path: /home/{{ home_user }}/.weechat/weechat.conf
+  register: weechat
+
+- name: Manage weechat configuration
+  shell: cp -r /home/{{ home_user }}/git/EmilienM/backup/weechat/* /home/{{ home_user }}/.weechat/
+  when: weechat.stat.islnk is not defined
+
+- name: Deploy custom zsh environment
+  template:
+    src: zshrc
+    dest: /etc/profile.d/zsh-{{ home_user }}.sh
+  become: true
+
+- name: Configure OpenVPN
+  copy:
+    src: "{{ item }}"
+    dest: /etc/openvpn/server
+    owner: "root"
+    mode: 0700
+  with_fileglob:
+    - '/home/{{ home_user }}/git/EmilienM/backup/openvpn/server/*'
+  become: true

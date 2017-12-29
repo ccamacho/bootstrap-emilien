@@ -1,3 +1,7 @@
+---
+
+- name: Include client variables
+  include_vars: client.yml
 
 - name: Install the rpmfusion repo packages
   dnf:

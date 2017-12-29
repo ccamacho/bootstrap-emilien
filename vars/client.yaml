@@ -1,0 +1,45 @@
+---
+# vars file for bootstrap-emilien / client
+
+package_list:
+  - autojump
+  - autojump-zsh
+  - awesome
+  - chromium
+  - curl
+  - git
+  - git-review
+  - libselinux-python
+  - openvpn
+  - owncloud-client
+  - parcellite
+  - python3-flake8
+  - socat
+  - terminator
+  - tig
+  - vim
+  - weechat
+  - wget
+  - zsh
+directory_list:
+  - .config/awesome
+  - .config/terminator
+  - .local/share/data/ownCloud
+  - .vimsessions
+  - .weechat
+  - bin
+  - git/EmilienM
+  - git/misc
+  - git/openstack
+  - git/rdo
+  - owncloud
+absent_directory_list:
+  - /etc/openvpn/server
+  - /home/{{ home_user }}/Desktop
+  - /home/{{ home_user }}/Documents
+  - /home/{{ home_user }}/Music
+  - /home/{{ home_user }}/Pictures
+  - /home/{{ home_user }}/Public
+  - /home/{{ home_user }}/Templates
+  - /home/{{ home_user }}/Videos
+fedora_version: 27
