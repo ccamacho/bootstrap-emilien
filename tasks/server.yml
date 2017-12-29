@@ -128,7 +128,7 @@
 - name: Configure OpenVPN
   copy:
     src: "{{ item }}"
-    dest: /etc/openvpn/server
+    dest: /etc/openvpn
     owner: "root"
     mode: 0700
   with_fileglob:
@@ -136,7 +136,10 @@
   become: true
 
 - name: Make sure openvpn is running
-  systemd: state=started name=openvpn
+  systemd:
+    enabled: true
+    state: started
+    name: openvpn@server.service
   become: true
 
 # TODO:

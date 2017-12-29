@@ -173,7 +173,7 @@
 - name: Configure OpenVPN
   copy:
     src: "{{ item }}"
-    dest: /etc/openvpn/client
+    dest: /etc/openvpn
     owner: "root"
     mode: 0700
   with_fileglob:
