@@ -163,7 +163,7 @@
     owner: "root"
     mode: 0700
   with_fileglob:
-    - '/home/{{ home_user }}/git/EmilienM/backup/openvpn/*'
+    - '/home/{{ home_user }}/git/EmilienM/backup/openvpn/client/*'
   become: true
 
 - name: Red Hat token service
