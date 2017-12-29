@@ -5,20 +5,20 @@
 
 - name: Install packages
   dnf: name={{ item }}
-  with_items: "{{ client_package_list }}"
+  with_items: "{{ package_list }}"
   become: true
 
 - name: Deploy directories
   file:
     path: /home/{{ home_user }}/{{ item }}
     state: directory
-  with_items: "{{ client_directory_list }}"
+  with_items: "{{ directory_list }}"
 
 - name: Cleanup directories
   file:
     path: "{{ item }}"
     state: absent
-  with_items: "{{ client_absent_directory_list }}"
+  with_items: "{{ absent_directory_list }}"
   become: true
 
 - name: Deploy secret files
