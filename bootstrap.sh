@@ -1,7 +1,8 @@
 #!/bin/bash
 [ -z "$TYPE" ] && echo "Need to set TYPE (client or server)" && exit 1;
-sudo dnf -y update
-sudo dnf -y install git ansible
+[ -f "/usr/bin/dnf" ] && PKG_BIN=dnf || PKG_BIN=yum
+sudo $PKG_BIN -y update
+sudo $PKG_BIN -y install git ansible
 mkdir -p .ssh
 git clone root@git.macchi.pro:/srv/git/backup.git /tmp/backup
 cp /tmp/backup/ssh/* ~/.ssh/
