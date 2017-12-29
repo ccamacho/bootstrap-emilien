@@ -71,6 +71,10 @@
     src: tripleo-release.sh
     dest: /home/{{ home_user }}/bin/tripleo-release.sh
 
+- name: Deploy puppet-tests script
+  template:
+    src: pt.sh
+    dest: /home/{{ home_user }}/bin/pt.sh
 
 - name: Install Gertty from source
   pip:
