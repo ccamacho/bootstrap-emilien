@@ -146,6 +146,7 @@
   become: true
 
 # TODO:
+# - ssh server
 # - firewall
 # - ssl certificates
 # - fail2ban
