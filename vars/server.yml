@@ -2,8 +2,6 @@
 # vars file for bootstrap-emilien / client
 
 package_list:
-  - autojump
-  - autojump-zsh
   - curl
   - git
   - libselinux-python
