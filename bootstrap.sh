@@ -6,6 +6,7 @@ sudo $PKG_BIN -y install git ansible
 mkdir -p .ssh
 git clone root@git.macchi.pro:/srv/git/backup.git /tmp/backup
 cp /tmp/backup/ssh/* ~/.ssh/
+chmod 0400 ~/.ssh/*
 rm -rf /tmp/backup
 git clone https://github.com/EmilienM/bootstrap-emilien /tmp/bootstrap-emilien
 sudo mv /tmp/bootstrap-emilien /etc/ansible/roles/
