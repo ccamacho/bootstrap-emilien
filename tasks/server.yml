@@ -140,3 +140,18 @@
   with_fileglob:
     - '/home/{{ home_user }}/git/EmilienM/backup/openvpn/server/*'
   become: true
+
+- name: Make sure openvpn is running
+  systemd: state=started name=openvpn
+  become: true
+
+# TODO:
+# - firewall
+# - ssl certificates
+# - fail2ban
+# - nginx
+# - owncloud server
+# - znc
+# - glowingbear
+# - transmission
+# - emby
