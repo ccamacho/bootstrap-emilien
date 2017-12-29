@@ -12,6 +12,7 @@ package_list:
   - wget
   - zsh
   - php-intl
+  - ufw
 directory_list:
   - /home/{{ home_user }}/.vimsessions
   - /home/{{ home_user }}/.weechat

@@ -143,6 +143,41 @@
     name: openvpn@server.service
   become: true
 
+- name: Make sure ufw is running
+  systemd:
+    enabled: true
+    state: started
+    name: ufw
+  become: true
+
+- name: Allow everything and enable UFW
+  ufw:
+    state: enabled
+    policy: allow
+  become: true
+
+- name: Open SSH in firewall
+  ufw:
+    rule: limit
+    port: 22
+    proto: tcp
+  become: true
+
+- name: Open Nginx in firewall
+  ufw:
+    rule: allow
+    port: 8443
+    proto: tcp
+  become: true
+
+- name: Open OpenVPN in firewall
+  ufw:
+    rule: allow
+    port: 443
+    proto: tcp
+  become: true
+
+
 # TODO:
 # - ssh server
 # - firewall
