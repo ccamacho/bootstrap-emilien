@@ -15,6 +15,18 @@ How to
 * Login and launch a terminal.
 * Run:
 
+For the client:
+```shell
+export TYPE=client
+```
+
+For the server:
+
+```shell
+export TYPE=server
+```
+
+And then:
 ```shell
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/EmilienM/bootstrap-emilien/master/bootstrap.sh)"
 ```

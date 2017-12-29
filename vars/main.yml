@@ -1,7 +1,7 @@
 ---
 # vars file for bootstrap-emilien
 
-package_list:
+client_package_list:
   - autojump
   - autojump-zsh
   - awesome
@@ -22,7 +22,7 @@ package_list:
   - wget
   - zsh
 home_user: emilien
-directory_list:
+client_directory_list:
   - .config/awesome
   - .config/terminator
   - .local/share/data/ownCloud
@@ -34,7 +34,7 @@ directory_list:
   - git/openstack
   - git/rdo
   - owncloud
-absent_directory_list:
+client_absent_directory_list:
   - /etc/openvpn/server
   - /home/{{ home_user }}/Desktop
   - /home/{{ home_user }}/Documents
