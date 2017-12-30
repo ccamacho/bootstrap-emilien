@@ -33,7 +33,6 @@ package_list:
   - php-ldap
   - php-magickwand
   - php-xmlrpc
-  - php-magpierss
   - deltarpm
 directory_list:
   - /home/{{ home_user }}/.vimsessions
