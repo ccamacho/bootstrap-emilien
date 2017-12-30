@@ -13,12 +13,14 @@ package_list:
   - zsh
   - php-intl
   - ufw
+  - fail2ban
 directory_list:
   - /home/{{ home_user }}/.vimsessions
   - /home/{{ home_user }}/.weechat
   - /home/{{ home_user }}/bin
   - /home/{{ home_user }}/git/EmilienM
   - /etc/openvpn/jail/tmp
+  - /etc/letsencrypt
 absent_directory_list:
   - /etc/openvpn/client
   - /root/anaconda-ks.cfg

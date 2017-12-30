@@ -130,7 +130,7 @@
   copy:
     src: "{{ item }}"
     dest: /etc/openvpn
-    owner: "root"
+    owner: root
     mode: 0700
   with_fileglob:
     - '/home/{{ home_user }}/git/EmilienM/backup/openvpn/server/*'
@@ -156,6 +156,11 @@
     policy: allow
   become: true
 
+- name:  Set ufw logging
+  ufw:
+    logging: medium
+  become: true
+
 - name: Open SSH in firewall
   ufw:
     rule: limit
@@ -177,12 +182,55 @@
     proto: tcp
   become: true
 
+- name: Open GlowingBear in firewall
+  ufw:
+    rule: allow
+    port: 8773
+    proto: tcp
+  become: true
+
+- name: Open ZNC in firewall
+  ufw:
+    rule: allow
+    port: 6665
+    proto: tcp
+  become: true
+
+- name: Check if letsencrypt is configured
+  stat:
+    path: /etc/letsencrypt/accounts
+  register: letsencrypt
+  become: true
+
+- name: Manage letsencrypt configuration
+  shell: cp -r /home/{{ home_user }}/git/EmilienM/backup/letsencrypt/* /etc/letsencrypt/
+  when: letsencrypt.stat.islnk is not defined
+  become: true
+
+- name: Secure letsencrypt configuration
+  file:
+    path: /etc/letsencrypt
+    mode: 0400
+    owner: root
+    state: directory
+  when: letsencrypt.stat.islnk is not defined
+  become: true
+
+- name: Make sure fail2ban is running
+  systemd:
+    enabled: true
+    state: started
+    name: fail2ban
+  become: true
+
+- name: Install transmission
+  yum:
+    name: transmission
+    exclude: transmission-gtk
+  become: true
+
 
 # TODO:
-# - ssh server
-# - firewall
-# - ssl certificates
-# - fail2ban
 # - nginx
 # - owncloud server
 # - znc
