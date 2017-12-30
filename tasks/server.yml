@@ -259,13 +259,21 @@
     name: transmission-daemon.service
   become: true
 
-- name: Make sure emby-server is running
-  systemd:
-    enabled: true
-    state: started
-    name: emby-server
-  become: true
+  #- name: Make sure emby-server is running
+  #  systemd:
+  #    enabled: true
+  #    state: started
+  #    name: emby-server
+  #  become: true
 
+- name: Prepare owncloud directory
+  file:
+    path: /home/owncloud
+    mode: 0750
+    owner: www-data
+    group: www-data
+    state: directory
+  become: true
 
 # TODO:
 # - nginx

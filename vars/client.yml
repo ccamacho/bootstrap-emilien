@@ -23,6 +23,7 @@ package_list:
   - zsh
   - NetworkManager-tui
   - htop
+  - deltarpm
 directory_list:
   - /home/{{ home_user }}/.config/awesome
   - /home/{{ home_user }}/.config/terminator
