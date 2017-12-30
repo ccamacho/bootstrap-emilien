@@ -34,6 +34,7 @@ package_list:
   - php-magickwand
   - php-xmlrpc
   - deltarpm
+  - bz2
 directory_list:
   - /home/{{ home_user }}/.vimsessions
   - /home/{{ home_user }}/.weechat
