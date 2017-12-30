@@ -270,8 +270,8 @@
   file:
     path: /home/owncloud
     mode: 0750
-    owner: www-data
-    group: www-data
+    owner: nginx
+    group: nginx
     state: directory
   become: true
 
