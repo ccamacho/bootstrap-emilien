@@ -18,7 +18,8 @@ package_list:
   - htop
   - nginx
   - php-fpm
-  - php php-mysql
+  - php
+  - php-mysql
   - sqlite
   - php-dom
   - php-mbstring
