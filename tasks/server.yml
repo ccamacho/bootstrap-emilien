@@ -275,6 +275,28 @@
     state: directory
   become: true
 
+- name: Make sure php-fpm is running
+  systemd:
+    enabled: true
+    state: started
+    name: php-fpm
+  become: true
+
+- name: Make sure nginx is running
+  systemd:
+    enabled: true
+    state: started
+    name: nginx
+  become: true
+
+# configure /etc/php-fpm.d/www.conf
+# user = nginx
+# group = nginx
+# env[HOSTNAME] = $HOSTNAME
+# env[PATH] = /usr/local/bin:/usr/bin:/bin
+# env[TMP] = /tmp
+# env[TMPDIR] = /tmp
+# env[TEMP] = /tmp
 # TODO:
 # - nginx
 # - owncloud server
