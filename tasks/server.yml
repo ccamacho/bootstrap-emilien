@@ -6,12 +6,12 @@
 # EPEL tasks stolen from:
 # http://yallalabs.com/linux/how-to-install-epel-repository-with-ansible-on-centos-7-rhel-7/
 - name: Check if EPEL repo is already configured
-  stat: path={{ epel_repofile_path }}
+  stat: path=/etc/yum.repos.d/epel.repo
   register: epel_repofile_result
 
 - name: Install EPEL repo
   yum:
-    name: "{{ epel_repo_url }}"
+    name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
     state: present
   register: result
   when: not epel_repofile_result.stat.exists
@@ -19,9 +19,22 @@
 
 - name: Import EPEL GPG key
   rpm_key:
-    key: "{{ epel_repo_gpg_key_url }}"
+    key: "https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}"
     state: present
   when: not epel_repofile_result.stat.exists
+  become: true
+
+- name: Check if Emby repo is already configured
+  stat: path=/etc/yum.repos.d/emby.repo
+  register: emby_repofile_result
+  become: true
+
+- name: Install Emby repository
+  get_url:
+    url: "http://download.opensuse.org/repositories/home:/emby/CentOS_7/home:emby.repo"
+    dest: /etc/yum.repos.d/emby.repo
+  register: result
+  when: not emby_repofile_result.stat.exists
   become: true
 
 - name: Install packages
@@ -229,11 +242,33 @@
     exclude: transmission-gtk
   become: true
 
+- name: Manage transmission configuration
+  copy:
+    src: "{{ item }}"
+    dest: /var/lib/transmission/
+    owner: root
+    mode: 0400
+  with_fileglob:
+    - '/home/{{ home_user }}/git/EmilienM/backup/transmission/settings.json'
+  become: true
+
+- name: Make sure transmission is running
+  systemd:
+    enabled: true
+    state: started
+    name: transmission-daemon.service
+  become: true
+
+- name: Make sure emby-server is running
+  systemd:
+    enabled: true
+    state: started
+    name: emby-server
+  become: true
+
 
 # TODO:
 # - nginx
 # - owncloud server
 # - znc
 # - glowingbear
-# - transmission
-# - emby

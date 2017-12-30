@@ -14,6 +14,8 @@ package_list:
   - php-intl
   - ufw
   - fail2ban
+  - emby-server
+  - htop
 directory_list:
   - /home/{{ home_user }}/.vimsessions
   - /home/{{ home_user }}/.weechat
@@ -21,6 +23,7 @@ directory_list:
   - /home/{{ home_user }}/git/EmilienM
   - /etc/openvpn/jail/tmp
   - /etc/letsencrypt
+  - /home/torrents
 absent_directory_list:
   - /etc/openvpn/client
   - /root/anaconda-ks.cfg

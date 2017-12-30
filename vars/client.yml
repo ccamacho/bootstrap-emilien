@@ -22,6 +22,7 @@ package_list:
   - wget
   - zsh
   - NetworkManager-tui
+  - htop
 directory_list:
   - /home/{{ home_user }}/.config/awesome
   - /home/{{ home_user }}/.config/terminator
